@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rythu Bandam - Smart Farming Portal</title>
+  <style>
+    body {
+  background-image: url('logo.png');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 180px auto;
+  background-color: #f4fff4;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+
+    header {
+      background-color: #2e7d32;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 40px;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav button {
+      margin: 0 10px;
+      padding: 10px 20px;
+      background-color: white;
+      color: #2e7d32;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    nav button:hover {
+      background-color: #a5d6a7;
+    }
+
+    .container {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .intro {
+      background-color: #e8f5e9;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    ul {
+      list-style-type: square;
+      background-color: #e8f5e9;
+      padding: 20px;
+      max-width: 300px;
+      margin: 0 auto 30px;
+      border-radius: 10px;
+      text-align: left;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+
+    ul li {
+      padding: 10px;
+      font-size: 18px;
+      color: #1b5e20;
+    }
+
+    img {
+      width: 250px;
+      margin: 20px auto;
+      display: block;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    }
+
+    .links a {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .links a:hover {
+      background-color: #388e3c;
+    }
+
+    #aboutApp {
+      display: none;
+      background-color: #e8f5e9;
+      padding: 20px;
+      margin: 30px auto;
+      max-width: 700px;
+      border-radius: 10px;
+      text-align: left;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #c8e6c9;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🌾 Rythu Bandam</h1>
+    <nav>
+      <button onclick="showAlert()">Welcome</button>
+      <button onclick="toggleAbout()">About This App</button>
+      <button onclick="location.href='index.html'">Home</button>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="intro">
+      <h2>Welcome to Rythu Bandam</h2>
+      <p>
+        Rythu Bandam is a smart farming web portal designed to empower farmers with real-time access to critical agricultural information. 
+        Whether it’s crop selection guidance, weather reports, government schemes, or market prices — we bring it all together in one place.
+      </p>
+      <p>
+        Our mission is to connect agriculture and technology for the benefit of every farmer.
+        With user-friendly tools and reliable information, we help farmers make better decisions for better yields.
+      </p>
+    </div>
+
+    <ul>
+      <li>Weather</li>
+      <li>Crop Prices</li>
+      <li>Government Schemes</li>
+      <li>Nearby Shops</li>
+    </ul>
+
+        <img src="logo.png" alt="App Logo">
+
+    <div class="links">
+      <a href="" target="_blank">Weather Report</a> 
+      <a href="" target="_blank">Crop Prices</a> 
+      <a href="" target="_blank">Govt Schemes</a>
+      <a href="" target="_blank">Nearby Shops</a>
+    </div>
+
+    <div id="aboutApp">
+      <h2>About Rythu Bandam</h2>
+      <p>
+        Rythu Bandam is a digital initiative created as part of a web development internship project. The purpose of this platform is to assist farmers by offering simplified access to resources like:
+      </p>
+      <ul>
+        <li>Daily weather forecast integration</li>
+        <li>Live crop price tracking</li>
+        <li>Direct access to government agricultural welfare schemes</li>
+        <li>Mapping of nearby agricultural support shops</li>
+      </ul>
+      <p>
+        This project is built using HTML, CSS, and JavaScript as part of the ApexPlanet 45-day internship program.
+      </p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Rythu Bandam. All Rights Reserved.
+  </footer>
+
+  <script>
+    function showAlert() {
+      alert("Welcome to Rythu Bandam Portal!");
+    }
+
+    function toggleAbout() {
+      const about = document.getElementById('aboutApp');
+      if (about.style.display === 'none' || about.style.display === '') {
+        about.style.display = 'block';
+      } else {
+        about.style.display = 'none';
+      }
+    }
+  </script>
+
+</body>
+</html>
