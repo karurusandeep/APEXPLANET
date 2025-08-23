@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task 4 - To-Do List | Rythu Bandam</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4fff4;
+      margin: 0;
+    }
+    header {
+      background: #2e7d32;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    nav a {
+      text-decoration: none;
+      color: #2e7d32;
+      background: white;
+      padding: 8px 15px;
+      margin: 5px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .todo-container {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 500px;
+      margin: 30px auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    input {
+      width: 70%;
+      padding: 10px;
+      border: 2px solid #a5d6a7;
+      border-radius: 8px;
+    }
+    button {
+      padding: 10px;
+      border: none;
+      background: #2e7d32;
+      color: white;
+      border-radius: 8px;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 15px;
+    }
+    ul li {
+      background: #e8f5e9;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .delete-btn {
+      background: crimson;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      padding: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌾 Rythu Bandam</h1>
+    <nav>
+      <a href="task4_about.html">About</a>
+      <a href="task4_todo.html">To-Do List</a>
+      <a href="task4_products.html">Products</a>
+    </nav>
+  </header>
+
+  <div class="todo-container">
+    <h2>📝 Farmer’s To-Do List (with Save)</h2>
+    <input type="text" id="taskInput" placeholder="Enter farming task...">
+    <button onclick="addTask()">Add</button>
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+    function renderTasks() {
+      const list = document.getElementById("taskList");
+      list.innerHTML = "";
+      tasks.forEach((task, i) => {
+        const li = document.createElement("li");
+        li.textContent = task;
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "Delete";
+        delBtn.classList.add("delete-btn");
+        delBtn.onclick = () => {
+          tasks.splice(i, 1);
+          saveTasks();
+        };
+        li.appendChild(delBtn);
+        list.appendChild(li);
+      });
+    }
+
+    function addTask() {
+      const input = document.getElementById("taskInput");
+      if (input.value.trim() !== "") {
+        tasks.push(input.value.trim());
+        saveTasks();
+        input.value = "";
+      }
+    }
+
+    function saveTasks() {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      renderTasks();
+    }
+
+    renderTasks();
+  </script>
+</body>
+</html>
