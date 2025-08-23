@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task 3 - Farmer Quiz | Rythu Bandam</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4fff4;
+      color: #333;
+    }
+
+    header {
+      background: #2e7d32;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #2e7d32;
+      background: white;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    nav a:hover {
+      background: #a5d6a7;
+    }
+
+    /* Language selector */
+    .language-select {
+      margin-left: auto;
+    }
+
+    .quiz-container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .quiz-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2e7d32;
+    }
+
+    .question {
+      font-size: 18px;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .options label {
+      display: block;
+      padding: 8px;
+      border: 1px solid #a5d6a7;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    .options input {
+      margin-right: 10px;
+    }
+
+    button {
+      padding: 10px 15px;
+      background: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      display: block;
+      margin: 20px auto 0;
+    }
+
+    button:hover {
+      background: #388e3c;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      text-align: center;
+      font-size: 18px;
+      color: #1b5e20;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #c8e6c9;
+      margin-top: 20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🌾 Rythu Bandam</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="task2.html">Task 2</a>
+      <a href="task3.html">Task 3</a>
+    </nav>
+    <select class="language-select" onchange="changeLanguage(this.value)">
+      <option value="en">English</option>
+      <option value="te">Telugu</option>
+      <option value="hi">Hindi</option>
+    </select>
+  </header>
+
+  <div class="quiz-container">
+    <h2 id="quizTitle">🧑‍🌾 Farmer Knowledge Quiz</h2>
+    <div id="quiz"></div>
+    <button onclick="submitQuiz()">Submit Quiz</button>
+    <div id="result"></div>
+  </div>
+
+  <footer>
+    &copy; 2025 Rythu Bandam. All Rights Reserved.
+  </footer>
+
+  <script>
+    // Quiz translations
+    const quizData = {
+      en: [
+        {
+          question: "Which crop requires the most water?",
+          options: ["Wheat", "Rice", "Bajra", "Groundnut"],
+          answer: "Rice"
+        },
+        {
+          question: "What is the best season for Rabi crops?",
+          options: ["Winter", "Summer", "Monsoon", "Spring"],
+          answer: "Winter"
+        },
+        {
+          question: "Which nutrient is essential for plant growth?",
+          options: ["Oxygen", "Nitrogen", "Carbon dioxide", "Hydrogen"],
+          answer: "Nitrogen"
+        }
+      ],
+      te: [
+        {
+          question: "ఎక్కువ నీరు అవసరమయ్యే పంట ఏది?",
+          options: ["గోధుమ", "బియ్యం", "బాజ్రా", "వేరుశనగ"],
+          answer: "బియ్యం"
+        },
+        {
+          question: "రబీ పంటలకు సరైన సీజన్ ఏది?",
+          options: ["శీతాకాలం", "గ్రీష్మం", "వర్షాకాలం", "వసంతం"],
+          answer: "శీతాకాలం"
+        },
+        {
+          question: "మొక్కల పెరుగుదలకు అత్యవసర పోషకం ఏది?",
+          options: ["ఆక్సిజన్", "నైట్రోజన్", "కార్బన్ డయాక్సైడ్", "హైడ్రోజన్"],
+          answer: "నైట్రోజన్"
+        }
+      ],
+      hi: [
+        {
+          question: "किस फसल को सबसे अधिक पानी की आवश्यकता होती है?",
+          options: ["गेहूँ", "धान", "बाजरा", "मूंगफली"],
+          answer: "धान"
+        },
+        {
+          question: "रबी फसलों का सबसे अच्छा मौसम कौन सा है?",
+          options: ["सर्दी", "गर्मी", "मानसून", "बसंत"],
+          answer: "सर्दी"
+        },
+        {
+          question: "पौधों की वृद्धि के लिए कौन सा पोषक तत्व आवश्यक है?",
+          options: ["ऑक्सीजन", "नाइट्रोजन", "कार्बन डाइऑक्साइड", "हाइड्रोजन"],
+          answer: "नाइट्रोजन"
+        }
+      ]
+    };
+
+    let currentLang = "en";
+
+    function loadQuiz() {
+      const quizContainer = document.getElementById("quiz");
+      quizContainer.innerHTML = ""; // reset
+      quizData[currentLang].forEach((q, index) => {
+        const questionHTML = `
+          <div class="question">${index + 1}. ${q.question}</div>
+          <div class="options">
+            ${q.options.map(option => `
+              <label>
+                <input type="radio" name="q${index}" value="${option}">
+                ${option}
+              </label>
+            `).join('')}
+          </div>
+        `;
+        quizContainer.innerHTML += questionHTML;
+      });
+    }
+
+    function changeLanguage(lang) {
+      currentLang = lang;
+      loadQuiz();
+      document.getElementById("result").textContent = "";
+    }
+
+    function submitQuiz() {
+      let score = 0;
+      let answeredAll = true;
+
+      quizData[currentLang].forEach((q, index) => {
+        const selected = document.querySelector(`input[name="q${index}"]:checked`);
+        if (!selected) {
+          answeredAll = false;
+        } else if (selected.value === q.answer) {
+          score++;
+        }
+      });
+
+      if (!answeredAll) {
+        alert("⚠️ Please answer all questions before submitting!");
+        return;
+      }
+
+      alert("✅ Quiz Submitted Successfully!");
+      document.getElementById("result").textContent =
+        `You scored ${score} out of ${quizData[currentLang].length}`;
+    }
+
+    // Initial load
+    loadQuiz();
+  </script>
+
+</body>
+</html>
